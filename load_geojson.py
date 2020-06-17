@@ -121,7 +121,7 @@ def cleanse_r_v(file1):
     """Writing the data to a new CSV file"""
     df.to_csv('npdc_R_V_cleansed.csv', index=False)
 
-    logging.info("End of cleansing file: ", file1)
+    logging.info("End of cleansing file: {}".format(file1))
     return df
 
 def twitter_module():
