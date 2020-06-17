@@ -1,10 +1,11 @@
+import logging
 import json
 import csv
 import requests
 from datetime import datetime
+import time
 import twitter
 import pandas as pd
-
 
 def load_geo_data(file_prefix, url, count_params, rec_params):
     """declare initial varaibles"""
@@ -21,8 +22,12 @@ def load_geo_data(file_prefix, url, count_params, rec_params):
     rec_tm = datetime.strftime(datetime.now(), '%H%M%S') # Time record was created
     raw_filename = file_prefix+'_'+file_dt+'.geojson'  # Name of raw GEOJSON file
 
+    logging.info("Total records available for download: {}".format(remaining_count))
+
     """Retrieve records from GEOHub API call.  Records are limited to 'max_value' variable.  
     Several calls are made based on the remaining_count variable minus max_records until the remaining_count < 0"""
+
+    logging.info("Start writing source file")
 
     while remaining_count > 0:
 
@@ -41,7 +46,7 @@ def load_geo_data(file_prefix, url, count_params, rec_params):
         """Each GeoJSON file created is unique due to the datetime value in the file name"""
 
         with open(raw_filename, 'a') as geojson_file:  # create
-            print("Writing raw json")
+            logging.info("Writing raw json")
             json.dump(json_data, geojson_file)
 
 
@@ -58,7 +63,7 @@ def load_geo_data(file_prefix, url, count_params, rec_params):
 
             csv_writer = csv.DictWriter(csv_file, fieldnames=keys, delimiter=',')
 
-            print("Writing address CSV")
+            logging.info("Writing address CSV")
 
             csv_writer.writeheader()
 
@@ -79,7 +84,7 @@ def load_geo_data(file_prefix, url, count_params, rec_params):
 
             csv_writer = csv.DictWriter(csv_file, fieldnames=keys, delimiter=',')
 
-            print("Writing Parks and Natural Areas CSV")
+            logging.info("Writing Parks and Natural Areas CSV")
 
             csv_writer.writeheader()
 
@@ -90,13 +95,14 @@ def load_geo_data(file_prefix, url, count_params, rec_params):
                 row.update(update_row)
                 csv_writer.writerow(row)
 
-    print("Completed writing CSV files")
+    logging.info("Completed writing CSV files")
 
 
 
 def cleanse_r_v(file1):
     """Splitting the 'full_address' value into separate parts and standardsing the case to provide a consistent
     approach to data sets"""
+    logging.info("Cleanse file: {}".format(file1))
     df = pd.read_csv(file1)  # Read data from file mentioned in function call
 
     """Spliting the 'full_address' value using regex and applying a consistent case"""
@@ -115,10 +121,13 @@ def cleanse_r_v(file1):
     """Writing the data to a new CSV file"""
     df.to_csv('npdc_R_V_cleansed.csv', index=False)
 
+    logging.info("End of cleansing file: ", file1)
     return df
 
 def twitter_module():
     """For this process, the entire available amount of tweets for the specified twitter account is downloaded"""
+    logging.info("Begin downloading tweets")
+
     api = twitter.Api(consumer_key='N1VGVEsuxkRxjecJkCZESfyNT',
                       consumer_secret='bUs1mT0TeiuXSmqh0SjPKzpM09vEDl9x4uAWm5xwFtUN6vdiAv',
                       access_token_key='2377854260-eQg0hqbz5S4Los8irTwchKFPl8SNTtOylM5sIl0',
@@ -151,9 +160,13 @@ def twitter_module():
             row_data = '{street},\"{tweet}\"\n'.format(street=street, tweet=tweet)
             csv_file.write(row_data)
 
+    logging.info("End downloading tweets")
+
 def summarise_p_na(file2):
     """Individual parks and natural areas for a given LocationArea are grouped into a single list and the total
     number of parks & natural areas and the total size of all the areas is calculated"""
+    logging.info("Begin summarising parks data")
+
     df = pd.read_csv(file2)  # File used with park & natural area details
 
     df['LocationArea'] = df['LocationArea'].str.upper()  # Standardise case of values
@@ -179,6 +192,8 @@ def summarise_p_na(file2):
     """Write merged and summarised values to file"""
     summ.to_csv('n_pa_summ.csv', index=False)
 
+    logging.info("End summarising parks data")
+
     return summ
 
 
@@ -189,6 +204,8 @@ def combine_add_and_na(file1, file2, file3):
     twitter_module()  # This function is dependant on the previous function to complete
     df2 = summarise_p_na(file2)
     df3 = pd.read_csv(file3)
+
+    logging.info("Begin merging data")
 
     """Left merge to combine rates data and parks data set"""
     merged_df = df1.merge(df2, on='LocationArea', how='left')
@@ -220,11 +237,24 @@ def combine_add_and_na(file1, file2, file3):
     """Write the final file"""
     final_df.to_csv('final.csv', index=False)
 
+    logging.info("End merging data")
 
 def main():
+    """Include basic logging"""
+    logging.basicConfig(filename='TSB_test.log', level=logging.INFO,
+                        format='%(asctime)s: %(levelname)s: %(message)s')
+
+    script_st = int(time.time())
+
+    logging.info("Script start")
+
     load_geo_data('npdc_R_V', 'https://atlas.npdc.govt.nz/server/rest/services/OpenData/Customer_Regulatory/FeatureServer/0/query?', 'where=1=1&returnCountOnly=true&f=json', 'outFields=*&outSR=4326&f=geojson&where=OBJECTID>')
     load_geo_data('npdc_P_NA', 'https://atlas.npdc.govt.nz/server/rest/services/OpenData/Infrastructure_Parks/FeatureServer/4/query?', 'where=1=1&returnCountOnly=true&f=json', 'outFields=*&outSR=4326&f=geojson&where=OBJECTID>')
     combine_add_and_na('npdc_R_V.csv', 'npdc_P_NA.csv', 'st_in_tweet.csv')
+
+    logging.info("Script end")
+
+    logging.info("duration of script: {}".format(int(time.time())- script_st))
 
 if __name__ == '__main__':
     main()
