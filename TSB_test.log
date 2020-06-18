@@ -1,0 +1,80 @@
+2020-06-17 12:16:15,273: INFO: Script start
+2020-06-17 12:16:15,680: INFO: Total records available for download: 38331
+2020-06-17 12:16:15,681: INFO: Start writing source file
+2020-06-17 12:16:25,461: INFO: Writing raw json
+2020-06-17 12:16:31,837: INFO: Writing address CSV
+2020-06-17 12:16:31,953: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:16:41,772: INFO: Writing raw json
+2020-06-17 12:16:46,067: INFO: Writing address CSV
+2020-06-17 12:16:46,153: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:16:50,194: INFO: Writing raw json
+2020-06-17 12:16:51,259: INFO: Writing address CSV
+2020-06-17 12:16:51,347: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:16:57,279: INFO: Writing raw json
+2020-06-17 12:17:00,871: INFO: Writing address CSV
+2020-06-17 12:17:00,963: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:06,934: INFO: Writing raw json
+2020-06-17 12:17:09,940: INFO: Writing address CSV
+2020-06-17 12:17:10,036: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:13,625: INFO: Writing raw json
+2020-06-17 12:17:15,338: INFO: Writing address CSV
+2020-06-17 12:17:15,427: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:18,424: INFO: Writing raw json
+2020-06-17 12:17:19,658: INFO: Writing address CSV
+2020-06-17 12:17:19,759: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:22,494: INFO: Writing raw json
+2020-06-17 12:17:23,599: INFO: Writing address CSV
+2020-06-17 12:17:23,687: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:26,151: INFO: Writing raw json
+2020-06-17 12:17:27,286: INFO: Writing address CSV
+2020-06-17 12:17:27,374: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:30,423: INFO: Writing raw json
+2020-06-17 12:17:31,892: INFO: Writing address CSV
+2020-06-17 12:17:31,988: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:34,567: INFO: Writing raw json
+2020-06-17 12:17:35,723: INFO: Writing address CSV
+2020-06-17 12:17:35,813: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:38,189: INFO: Writing raw json
+2020-06-17 12:17:39,548: INFO: Writing address CSV
+2020-06-17 12:17:39,638: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:41,636: INFO: Writing raw json
+2020-06-17 12:17:42,720: INFO: Writing address CSV
+2020-06-17 12:17:42,814: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:44,996: INFO: Writing raw json
+2020-06-17 12:17:46,162: INFO: Writing address CSV
+2020-06-17 12:17:46,256: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:48,416: INFO: Writing raw json
+2020-06-17 12:17:49,735: INFO: Writing address CSV
+2020-06-17 12:17:49,829: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:52,139: INFO: Writing raw json
+2020-06-17 12:17:53,301: INFO: Writing address CSV
+2020-06-17 12:17:53,396: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:55,719: INFO: Writing raw json
+2020-06-17 12:17:56,913: INFO: Writing address CSV
+2020-06-17 12:17:57,005: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:17:59,943: INFO: Writing raw json
+2020-06-17 12:18:01,998: INFO: Writing address CSV
+2020-06-17 12:18:02,091: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:18:07,319: INFO: Writing raw json
+2020-06-17 12:18:10,949: INFO: Writing address CSV
+2020-06-17 12:18:11,049: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:18:13,298: INFO: Writing raw json
+2020-06-17 12:18:13,678: INFO: Writing address CSV
+2020-06-17 12:18:13,699: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:18:13,797: INFO: Completed writing CSV files
+2020-06-17 12:18:14,127: INFO: Total records available for download: 434
+2020-06-17 12:18:14,128: INFO: Start writing source file
+2020-06-17 12:18:16,339: INFO: Writing raw json
+2020-06-17 12:18:18,682: INFO: Writing address CSV
+2020-06-17 12:18:18,704: INFO: Writing Parks and Natural Areas CSV
+2020-06-17 12:18:19,464: INFO: Completed writing CSV files
+2020-06-17 12:18:19,480: INFO: Cleanse file: npdc_R_V.csv
+2020-06-17 12:18:22,502: INFO: End of cleansing file: npdc_R_V.csv
+2020-06-17 12:18:22,502: INFO: Begin downloading tweets
+2020-06-17 12:18:23,724: INFO: End downloading tweets
+2020-06-17 12:18:23,744: INFO: Begin summarising parks data
+2020-06-17 12:18:23,838: INFO: End summarising parks data
+2020-06-17 12:18:23,845: INFO: Begin merging data
+2020-06-17 12:18:31,145: INFO: End merging data
+2020-06-17 12:18:31,169: INFO: Script end
+2020-06-17 12:18:31,170: INFO: duration of script: 136
