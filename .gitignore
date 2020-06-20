@@ -1,6 +1,7 @@
 #Output files#
 ##############
-
-.csv
-.geojson
-.log
+/output
+*.zip
+*.csv
+*.geojson
+*.log
